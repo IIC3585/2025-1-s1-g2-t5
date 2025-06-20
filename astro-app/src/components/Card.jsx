@@ -23,6 +23,7 @@ const Card = ({ card }) => {
             </ul>
           </div>
         )}
+        <h3 className="text-sm font-medium text-gray-600">Price: $ {card.data.price} CLP</h3>
       </div>
     </div>
   );

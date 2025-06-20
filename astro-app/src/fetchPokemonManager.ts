@@ -16,6 +16,7 @@ export const cardSchema = {
     },
     types: Array,
     description: String,
+    price: Number,
 };
     
 
@@ -27,7 +28,6 @@ export async function fetchPokemonCards() {
             return [];
         });
     
-    // Only take the first 100 cards
     const cardsToFetch = pokemonCards.slice(0, 100);
 
     const detailCards = await Promise.all(
@@ -36,6 +36,7 @@ export async function fetchPokemonCards() {
                 const resCarta = await fetch(`${BASE_URL}${card.id}`);
                 const carta = await resCarta.json();
                 carta.image += "/high.png";
+                carta.price = Number(Math.random().toFixed(2)) * 100000;
                 return pick(carta, Object.keys(cardSchema));
             } catch (error) {
                 console.error(`Error fetching card ${card.id}:`, error);
@@ -44,7 +45,6 @@ export async function fetchPokemonCards() {
         })
     );
 
-    // Filter out any nulls from failed fetches
     return detailCards.filter(Boolean);
 }
 

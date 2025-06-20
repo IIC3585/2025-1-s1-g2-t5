@@ -18,6 +18,7 @@ const pokemonCards = defineCollection({
         }),
         types: z.array(z.string()).optional(),
         description: z.string().optional(),
+        price: z.number()
     })
 });
 

@@ -29,12 +29,13 @@ export async function fetchPokemonCards() {
         });
     
     const cardsToFetch = pokemonCards.slice(0, 100);
-
+    
     const detailCards = await Promise.all(
         cardsToFetch.map(async (card: any) => {
             try {
                 const resCarta = await fetch(`${BASE_URL}${card.id}`);
                 const carta = await resCarta.json();
+                console.log(carta);
                 carta.image += "/high.png";
                 carta.price = Number(Math.random().toFixed(2)) * 100000;
                 return pick(carta, Object.keys(cardSchema));

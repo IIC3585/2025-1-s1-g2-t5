@@ -2,6 +2,7 @@
   export let cartas;
   let tipoSeleccionado = "Todos";
   let rarezaSeleccionada = "Todas";
+  let busquedaNombre = "";
 
   // Tipos únicos dinámicos
   $: tiposUnicos = cartas
@@ -13,17 +14,33 @@
     ? Array.from(new Set(cartas.map(carta => carta.data.rarity).filter(Boolean)))
     : [];
 
+    // Función para resetear filtros
+  const resetearFiltros = () => {
+    tipoSeleccionado = "Todos";
+    rarezaSeleccionada = "Todas";
+    busquedaNombre = "";
+  };
+
   // Filtra por tipo Y rareza
   $: cartasFiltradas = cartas.filter(carta => {
     const cumpleTipo = tipoSeleccionado === "Todos" || 
                       (carta.data.types && carta.data.types.includes(tipoSeleccionado));
     const cumpleRareza = rarezaSeleccionada === "Todas" || 
                          carta.data.rarity === rarezaSeleccionada;
-    return cumpleTipo && cumpleRareza;
+    const cumpleNombre = busquedaNombre === "" || 
+                         carta.data.name.toLowerCase().includes(busquedaNombre.toLowerCase());
+    return cumpleTipo && cumpleRareza && cumpleNombre;
   });
 </script>
 
 <div class="filtros">
+   <!-- Input de búsqueda por nombre -->
+  <input 
+    type="text" 
+    bind:value={busquedaNombre} 
+    placeholder="Buscar por nombre..." 
+    class="busqueda-input"
+  />
   <!-- Filtro por tipo dinámico -->
   <select bind:value={tipoSeleccionado}>
     <option value="Todos">Todos los tipos</option>
@@ -39,6 +56,11 @@
       <option value={rareza}>{rareza}</option>
     {/each}
   </select>
+
+    <!-- Botón Reset -->
+  <button on:click={resetearFiltros} class="reset-btn">
+    Reiniciar filtros
+  </button>
 </div>
 
 <div class="cartas-grid">
@@ -59,6 +81,28 @@
     margin-bottom: 20px;
     display: flex;
     gap: 10px;
+  }
+
+  .busqueda-input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    flex-grow: 1;
+  }
+
+
+  .reset-btn {
+    padding: 8px 12px;
+    background: #f44336;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .reset-btn:hover {
+    background: #d32f2f;
   }
   .cartas-grid {
     display: grid;

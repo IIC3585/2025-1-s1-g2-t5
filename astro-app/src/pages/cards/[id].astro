@@ -1,0 +1,27 @@
+---
+import { getCollection, render } from 'astro:content';
+import Card  from '../../components/Card.jsx';
+import "../../styles/global.css";
+
+export async function getStaticPaths() {
+  const cards = await getCollection('pokemonCards');
+  return cards.map((pokemonCards: any ) => ({
+    params: { id: pokemonCards.id },
+    props: { pokemonCards }
+  }));
+}
+
+const { pokemonCards } = Astro.props;
+const Content = await render(pokemonCards);
+---
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <Card client:load card={pokemonCards} />
+    </body>
+</html>
+
+</Content>

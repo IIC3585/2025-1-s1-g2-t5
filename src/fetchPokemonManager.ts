@@ -37,7 +37,7 @@ export async function fetchPokemonCards() {
                 const carta = await resCarta.json();
                 // console.log(carta);
                 carta.image += "/high.png";
-                carta.price = Number(Math.random().toFixed(2)) * 100000;
+                carta.price = getRandomPrice(10000, 100000);
                 return pick(carta, Object.keys(cardSchema));
             } catch (error) {
                 console.error(`Error fetching card ${card.id}:`, error);
@@ -50,3 +50,6 @@ export async function fetchPokemonCards() {
 }
 
 
+const getRandomPrice = (min: number, max: number) => {
+    return Number(Math.random().toFixed(2)) * (max - min) + min;
+}

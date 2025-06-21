@@ -1,5 +1,6 @@
 const BASE_URL = "https://api.tcgdex.net/v2/es/cards/"
-import { pick } from "lodash";
+import lodash from "lodash";
+const { pick } = lodash;
 
 export const cardSchema = {
     id: String,

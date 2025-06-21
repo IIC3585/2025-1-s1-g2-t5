@@ -63,18 +63,31 @@
   </button>
 </div>
 
-<div class="cartas-grid">
-  {#each cartasFiltradas as carta}
-    <div class="carta">
-      <img src={carta.data.image} alt={carta.data.name} width="150" />
-      <h3>{carta.data.name}</h3>
-      <p>Rareza: {carta.data.rarity}</p>
-      {#if carta.data.types}
-        <p>Tipos: {carta.data.types.join(', ')}</p>
-      {/if}
-    </div>
-  {/each}
-</div>
+  <div class="cartas-grid">
+    {#each cartasFiltradas as carta}
+      <a 
+        href={`/cards/${carta.id}`}
+      class="carta group bg-gradient-to-b from-yellow-100 via-yellow-50 to-yellow-100 hover:bg-gradient-to-b hover:from-yellow-200 hover:via-yellow-100 hover:to-yellow-200 transition-all duration-200"      >
+            <div class="relative h-40 bg-white/80 rounded-lg border-2 border-yellow-300 overflow-hidden mb-3"></div>
+        <img 
+          src={carta.data.image} 
+          alt={carta.data.name} 
+          width="150" 
+          class="w-full h-full object-contain p-2"
+        />
+        
+        <h3 class="text-lg font-bold text-center group-hover:text-yellow-600">{carta.data.name}</h3>
+        <p class="text-center text-gray-600">${carta.data.price.toLocaleString()} CLP</p>
+        {#if carta.data.types}
+          <div class="mt-2 text-center">
+            <span class="text-sm text-gray-500">Tipos: </span>
+            <span class="text-sm font-medium">{carta.data.types.join(', ')}</span>
+          </div>
+        {/if}
+      </a>
+    {/each}
+  </div>
+
 
 <style>
   .filtros {

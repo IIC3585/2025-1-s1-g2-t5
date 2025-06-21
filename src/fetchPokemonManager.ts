@@ -1,6 +1,5 @@
 const BASE_URL = "https://api.tcgdex.net/v2/es/cards/"
-import lodash from "lodash";
-const { pick } = lodash;
+import { pick } from "lodash";
 
 export const cardSchema = {
     id: String,
@@ -35,7 +34,7 @@ export async function fetchPokemonCards() {
             try {
                 const resCarta = await fetch(`${BASE_URL}${card.id}`);
                 const carta = await resCarta.json();
-                console.log(carta);
+                // console.log(carta);
                 carta.image += "/high.png";
                 carta.price = Number(Math.random().toFixed(2)) * 100000;
                 return pick(carta, Object.keys(cardSchema));

@@ -6,9 +6,16 @@ import "../styles/global.css";
 ---
 
 <Layout>
-  <main class="flex flex-col gap-20 items-center mt-10">
+  <main class="flex flex-col gap-18 items-center">
     <SpritesBar client:load direction="left" />
     <WelcomeMessage client:only="react" />
+
+    <a 
+        href="/todos-pokemones" 
+        class="mt-8 inline-block px-8 py-4 bg-yellow-500 hover:bg-yellow-600 text-white font-bold rounded-full shadow-lg hover:scale-105 transition-all duration-200 text-lg"
+      >
+        Ver todos los Pokémon
+      </a>
     <SpritesBar client:load direction="right" />
   </main>
 </Layout>

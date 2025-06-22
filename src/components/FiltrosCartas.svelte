@@ -164,11 +164,11 @@
                  bg-gradient-to-b from-yellow-50 via-white to-yellow-50
                  rounded-2xl p-4 shadow-lg transition hover:scale-105"
         >
-          <div class="w-full h-32 overflow-hidden rounded-lg border-2 border-yellow-300 mb-3">
+          <div class="w-full h-auto overflow-hidden rounded-lg border-2 border-yellow-300 mb-3">
             <img
               src={carta.data.image}
               alt={carta.data.name}
-              class="w-full h-full object-cover"
+              class="object-cover w-full h-auto block max-h-64 sm:max-h-80"
             />
           </div>
           <h3 class="text-lg font-extrabold text-center group-hover:text-yellow-600">

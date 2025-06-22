@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 
 const WelcomeMessage = () => (
-  <div className="flex flex-col items-center gap-6 mt-8">
+  <div className="flex flex-col items-center">
     <div className="flex flex-col items-center leading-tight">
       <span
   style={{

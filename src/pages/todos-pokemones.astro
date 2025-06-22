@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import FiltrosCartas from '../components/FiltrosCartas.svelte?client';
-import Header from '../components/Header';
+import HeaderClient from '../components/HeaderClient.tsx'
 import { getCollection } from 'astro:content';
 import "../styles/global.css";
 
@@ -10,8 +10,7 @@ const todasLasCartas = await getCollection('pokemonCards');
 
 <Layout>
   <div class="relative min-h-screen flex flex-col">
-    <Header cartCount={3} />
-
+    <HeaderClient client:only="react" />
     <main class="pt-24 flex flex-wrap items-start gap-4 justify-center">
       <div>
         <FiltrosCartas client:load cartas={todasLasCartas} />

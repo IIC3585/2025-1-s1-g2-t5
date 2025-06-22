@@ -26,3 +26,16 @@ export const addToCart = async (item: any) => {
     tx.onabort = () => reject(tx.error);
   });
 };
+
+
+export const getCartCount = async (): Promise<number> => {
+  const db = await openDB();
+  const tx = db.transaction('cart', 'readonly');
+  const store = tx.objectStore('cart');
+  const request = store.getAll();
+
+  return new Promise((resolve, reject) => {
+    request.onsuccess = () => resolve(request.result.length);
+    request.onerror = () => reject(request.error);
+  });
+};

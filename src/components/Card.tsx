@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { addToCart } from "../utils/cartDB";
 import ConfirmModal from "./ConfirmModal";
+import { addToCart } from "../utils/cartDB";
 
 type CardProps = {
   card: {
@@ -24,9 +24,7 @@ const Card: React.FC<CardProps> = ({ card }) => {
       id: card.id,
       name: card.data.name,
       price: card.data.price,
-      image: card.data.image,
-      description: card.data.description,
-      types: card.data.types,
+      image: card.data.image || "",
       quantity: 1,
     });
 

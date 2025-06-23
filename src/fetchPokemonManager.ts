@@ -35,6 +35,7 @@ export async function fetchPokemonCards() {
             try {
                 const resCarta = await fetch(`${BASE_URL}${card.id}`);
                 const carta = await resCarta.json();
+                if (!carta.image) return null;
                 carta.image += "/high.png";
                 carta.price = getRandomPrice(10000, 100000);
                 return pick(carta, Object.keys(cardSchema));
